@@ -1,1 +1,7 @@
-# [![ZIP](../../actions/workflows/zip.yml/badge.svg)](../../actions/workflows/zip.yml)
+<a href=../../actions/workflows/zip.yml>
+   <img 
+     src=../../actions/workflows/zip.yml/badge.svg
+     width=100%
+     height=100%
+  />
+</a>
