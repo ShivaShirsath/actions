@@ -43,6 +43,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: zip
-          asset_name: ${{ github.event.commits[1].message }}-ZIP-${{ github.run_number }}.zip
+          asset_path: README.md
+          asset_name: ${{ github.event.commits[2].message }}-ZIP-${{ github.run_number }}.zip
           asset_content_type: application/zip
