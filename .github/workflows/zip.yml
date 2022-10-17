@@ -1,0 +1,47 @@
+name: ZIP
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  zip:
+    name: Generate ZIP 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build ZIP
+        run: |
+         
+      - uses: actions/upload-artifact@v2
+        with:
+          name: zip
+          path: 
+  release:
+    name: Release ZIP
+    needs: zip
+    if: startsWith(github.event.commits[0].message, 'zip')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download ZIP
+        uses: actions/download-artifact@v2
+        with:
+          name: zip 
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+        with:
+          tag_name: v${{ github.run_number }}
+          release_name: Release v${{ github.run_number }}
+      - name: Upload Release APK
+        id: upload_release_asset
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: zip
+          asset_name: ${{ github.event.commits[1].message }}-ZIP-${{ github.run_number }}.zip
+          asset_content_type: application/zip
