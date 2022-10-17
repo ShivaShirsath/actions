@@ -33,7 +33,7 @@ jobs:
   release:
     name: Release ZIP
     needs: zip
-    if: startsWith(github.event.commits[0].message, 'zip')
+    #if: startsWith(github.event.commits[0].message, 'zip')
     runs-on: ubuntu-latest
     steps:
       - name: Download ZIP
