@@ -1,10 +1,14 @@
 name: ZIP
 
-on:
-  push:
-    branches:
-      - master
-      - main
+on: 
+  workflow_dispatch:
+    inputs:
+      folder:
+        description: 'Folder Name'     
+        required: true
+        default: 'folder_name'
+      command:
+        description: 'command'
 jobs:
   zip:
     name: Generate ZIP 
@@ -14,10 +18,18 @@ jobs:
       - name: Build ZIP
         run: |
          ls -a
+         xPWD=$PWD
+         
+         ${{ github.event.inputs.command }}
+         
+         cd $xPWD
+         tar -czf ${{ github.event.inputs.folder }}.tar.gz ${{ github.event.inputs.folder }}
+         ls -a
+         
       - uses: actions/upload-artifact@v2
         with:
           name: zip
-          path: ./README.md
+          path: ./${{ github.event.inputs.folder }}.tar.gz
   release:
     name: Release ZIP
     needs: zip
@@ -43,6 +55,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: README.md
-          asset_name: ${{ github.event.commits[2].message }}-ZIP-${{ github.run_number }}.zip
+          asset_path: ${{ github.event.inputs.folder }}.tar.gz
+          asset_name: ${{ github.event.inputs.folder }}-${{ github.run_number }}.tar.gz
           asset_content_type: application/zip
