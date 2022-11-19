@@ -8,5 +8,5 @@
 
 
 ```bash
-tar –xvzf documents.tar.gz –C /home/user/destination
+tar zxvf documents.tar.gz –C /home/user/destination
 ```
