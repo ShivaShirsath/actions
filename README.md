@@ -5,3 +5,8 @@
      height=100%
   />
 </a>
+
+
+```bash
+tar –xvzf documents.tar.gz –C /home/user/destination
+```
