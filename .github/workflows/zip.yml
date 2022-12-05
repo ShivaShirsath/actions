@@ -4,15 +4,21 @@ on:
   workflow_dispatch:
     inputs:
       user:
-        description: 'Github User Name'
+        description: 'User Name'
         required: true
         default: 'ShivaShirsath'
       repo:
-        description: 'Repository Name'
+        description: 'Repository'
         required: true
-        default: 'action'
+        default: 'repository'   
+      branch:
+        description: 'Branch'
+        required: true
+        default: 'master'
       command:
-        description: 'command'
+        description: 'Command'
+        required: true
+        default: 'npm install'
         
 jobs:
   zip:
@@ -27,7 +33,7 @@ jobs:
          
          xPWD=$PWD
          
-         git clone https://github.com/${{ github.event.inputs.user }}/${{ github.event.inputs.repo }}.git
+         git clone --branch ${{ github.event.inputs.branch }} https://github.com/${{ github.event.inputs.user }}/${{ github.event.inputs.repo }}.git
          
          cd ${{ github.event.inputs.repo }}
          
