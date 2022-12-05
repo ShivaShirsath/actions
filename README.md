@@ -8,5 +8,6 @@
 
 
 ```bash
-tar zxvf documents.tar.gz –C /home/user/destination
+tar -czf documents.tar.gz /path/to/destination      # compress
+tar zxvf documents.tar.gz –C /home/user/destination # extract
 ```
