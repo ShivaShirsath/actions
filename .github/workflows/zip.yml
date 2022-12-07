@@ -19,6 +19,9 @@ on:
         description: 'Command'
         required: true
         default: 'npm install'
+      build:
+        description: 'build'
+        default: '/build'
         
 jobs:
   zip:
@@ -49,7 +52,7 @@ jobs:
          
          cd $xPWD
          
-         tar -czf ${{ github.event.inputs.repo }}.tar.gz ${{ github.event.inputs.repo }}
+         tar -czf ${{ github.event.inputs.repo }}.tar.gz ${{ github.event.inputs.repo }}${{ github.event.inputs.build }}
          
          ls -a
          
@@ -57,6 +60,7 @@ jobs:
         with:
           name: zip
           path: ./${{ github.event.inputs.repo }}.tar.gz
+          
   release:
     name: Release ZIP
     needs: zip
