@@ -10,18 +10,18 @@ on:
       repo:
         description: 'Repository'
         required: true
-        default: 'repository'   
+        default: 'actions'   
       branch:
         description: 'Branch'
         required: true
-        default: 'master'
+        default: 'main'
       command:
         description: 'Command'
         required: true
-        default: 'npm install'
+        default: 'npm init -y && npm i react react-scripts -f --save'
       build:
-        description: 'build'
-        default: '/build'
+        description: 'Specific'
+        default: '/node_modules'
         
 jobs:
   zip:
